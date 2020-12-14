@@ -63,10 +63,10 @@ class HashTableHeaderPage {
   lsn_t GetLSN() const;
 
   /**
-   * Sets the LSN of this page
-   *
-   * @param lsn the log sequence number for the lsn field to be set to
-   */
+  * Sets the LSN of this page
+  *
+  * @param lsn the log sequence number for the lsn field to be set to
+  */
   void SetLSN(lsn_t lsn);
 
   /**
@@ -88,6 +88,11 @@ class HashTableHeaderPage {
    * @return the number of blocks currently stored in the header page
    */
   size_t NumBlocks();
+
+  /**
+   * Reset the block index (for resizing)
+   */
+  void ResetBlockIndex();
 
  private:
   __attribute__((unused)) lsn_t lsn_;

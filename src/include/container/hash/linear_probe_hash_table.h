@@ -1,7 +1,3 @@
-//===----------------------------------------------------------------------===//
-//
-//                         BusTub
-//
 // linear_probe_hash_table.h
 //
 // Identification: src/include/container/hash/linear_probe_hash_table.h
@@ -86,8 +82,21 @@ class LinearProbeHashTable : public HashTable<KeyType, ValueType, KeyComparator>
    */
   size_t GetSize();
 
+  /**
+   * Gets the index of the inserted key
+   */
+  slot_offset_t GetSlotIndex(const KeyType &key);
+
+  /**
+   * Access header page & block pages of the hashtable
+   */
+  HashTableHeaderPage *HeaderPage();
+  HashTableBlockPage<KeyType, ValueType, KeyComparator> *BlockPage(HashTableHeaderPage *header_page, size_t bucket_ind);
+
  private:
+  void appendBuckets(HashTableHeaderPage *header_page, size_t num_buckets);
   // member variable
+  std::string name_;
   page_id_t header_page_id_;
   BufferPoolManager *buffer_pool_manager_;
   KeyComparator comparator_;
